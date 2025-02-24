@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+mongoose.connect("mongodb://127.0.0.1:27017/test");
+
 const app = express();
 const port = 8080;
 const bodyParser = require("body-parser");
@@ -8,6 +10,13 @@ const connectdb = require("./config/db");
 
 app.use(bodyParser.json());
 
+const userSchema = new mongoose.Schema({
+  id: Number,
+  desc: String,
+  completed: String,
+});
+
+const User=mongoose.model("User", userSchema)
 const todos = [
   {
     id: 1,
